@@ -31,27 +31,27 @@
             naissance
         </p>
     </div>
-    <div th:each="jeu:${actor.getRole()}" class="row">
-        <div class="col-md-4">
-            <img alt="Bootstrap Image Preview" th:src="'/affiche/'+${jeu.film.affiche}" height="150" width="150" />
-        </div>
-        <div class="col-md-6">
-            <h2  th:text="'nom : '+${jeu.film.titre}">
-                heading
-            </h2>
-            <p th:text="'A jouer le '+${jeu.place}+'er role : '+${jeu.nom}">
-                nom du role
-            </p>
-            <h3>
-                Résumé :
-            </h3>
-            <p th:text="${jeu.film.resume}">
-                prenom de l'acteur
-            </p>
-            <p>
-                <a class="btn" th:href="@{'/film/'+${jeu.film.id}}">View details »</a>
-            </p>
-        </div>
+    <!--<div th:each="jeu:${actor.getRole()}" class="row">-->
+        <!--<div class="col-md-4">-->
+            <!--<img alt="Bootstrap Image Preview" th:src="'/affiche/'+${jeu.film.affiche}" height="150" width="150" />-->
+        <!--</div>-->
+        <!--<div class="col-md-6">-->
+            <!--<h2  th:text="'nom : '+${jeu.film.titre}">-->
+                <!--heading-->
+            <!--</h2>-->
+            <!--<p th:text="'A jouer le '+${jeu.place}+'er role : '+${jeu.nom}">-->
+                <!--nom du role-->
+            <!--</p>-->
+            <!--<h3>-->
+                <!--Résumé :-->
+            <!--</h3>-->
+            <!--<p th:text="${jeu.film.resume}">-->
+                <!--prenom de l'acteur-->
+            <!--</p>-->
+            <!--<p>-->
+                <!--<a class="btn" th:href="@{'/film/'+${jeu.film.id}}">View details »</a>-->
+            <!--</p>-->
+        <!--</div>-->
     </div>
 </div>
 <div th:replace="fragment/footer.html::footer"></div>

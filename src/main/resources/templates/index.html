@@ -5,23 +5,15 @@
 </head>
 <body>
 <div th:replace="fragment/header.html::nav"></div>
-<!--/////////////////////////////////////////////////////////////////////////////////////////////-->
-<!--on remplace le contenu de la balise H1 avec le contenu de th attention ça remplace tout-->
-<!--<h1 th:text="'bonjour '+${nom}">Hello World</h1>-->
-<!--&lt;!&ndash;on va afficher les film ici grace a l'objet filmsDao&ndash;&gt;-->
-<!--<ul>-->
-    <!--<li th:each="jilm:${films}"><a th:text="${jilm.getTitre()}"th:href="@{'/film/'+${jilm.getId()}}"></a></li>-->
-<!--</ul>-->
-<!--//////////////////////////////////////////////////////////////////////////////////////////-->
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div th:each="jilm:${films}" class="col-md-4">
-                    <h2 th:text="${jilm.getTitle}">
+                    <h2 th:text="${jilm.getTitle()}">
                         Heading
                     </h2>
-                    <p th:text="${jilm.resume}">
+                    <p th:text="${jilm.summary}">
                         Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
                     </p>
                     <p>

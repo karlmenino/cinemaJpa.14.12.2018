@@ -18,42 +18,42 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            <img alt="Bootstrap Image Preview" th:src="'/affiche/'+${film.getAffiche()}"height="300" width="300" />
+            <img alt="Bootstrap Image Preview" th:src="'/affiche/'+${film.getImage_path()}"height="300" width="300" />
         </div>
         <div class="col-md-6">
-            <h2 th:text="${film.titre}">
+            <h2 th:text="${film.title}">
                 Heading
             </h2>
-            <p th:text="${film.resume}">
+            <p th:text="${film.summary}">
                resumer du film
             </p>
-            <p th:text="'note ='+${film.notation}">
+            <p th:text="'note ='+${film.rating}">
               note du film
             </p>
         </div>
     </div>
-    <div th:each="role:${film.getRole()}" class="row">
-        <div class="col-md-4">
-            <img alt="Bootstrap Image Preview" th:src="'/image/'+${role.getPersonne().getPhotoPath()}" height="150" width="150" />
-        </div>
-        <div class="col-md-6">
-            <h2 th:text="${role.place}+'er role : '+${role.nom}">
-                Heading
-            </h2>
-            <p th:text="'nom : '+${role.personne.nom}">
-               nom de l'acteur
-            </p>
-            <p th:text="'prenom : '+${role.personne.prenom}">
-                prenom de l'acteur
-            </p>
-            <p th:text="'date de naissance : '+${role.personne.naissance}">
-                prenom de l'acteur
-            </p>
-            <p>
-                <a class="btn" th:href="@{'/acteur/'+${role.getPersonne().getPhotoPath()}}">View details »</a>
-            </p>
-        </div>
-    </div>
+    <!--<div th:each="role:${film}" class="row">-->
+        <!--<div class="col-md-4">-->
+            <!--<img alt="Bootstrap Image Preview" th:src="'/image/'+${role.getPersonne().getPhotoPath()}" height="150" width="150" />-->
+        <!--</div>-->
+        <!--<div class="col-md-6">-->
+            <!--<h2 th:text="${role.place}+'er role : '+${role.nom}">-->
+                <!--Heading-->
+            <!--</h2>-->
+            <!--<p th:text="'nom : '+${role.personne.nom}">-->
+               <!--nom de l'acteur-->
+            <!--</p>-->
+            <!--<p th:text="'prenom : '+${role.personne.prenom}">-->
+                <!--prenom de l'acteur-->
+            <!--</p>-->
+            <!--<p th:text="'date de naissance : '+${role.personne.naissance}">-->
+                <!--prenom de l'acteur-->
+            <!--</p>-->
+            <!--<p>-->
+                <!--<a class="btn" th:href="@{'/acteur/'+${role.getPersonne().getPhotoPath()}}">View details »</a>-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>
 <div th:replace="fragment/footer.html::footer"></div>
 </body>

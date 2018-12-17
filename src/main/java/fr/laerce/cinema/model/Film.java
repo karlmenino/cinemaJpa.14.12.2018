@@ -13,8 +13,7 @@ public class Film {
     private Double rating;
     private String image_path;
     private String summary;
-    private long film_director;
-    public List<Role> role;
+    private Personne film_director;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +21,7 @@ public class Film {
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -31,65 +31,67 @@ public class Film {
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
     @Basic
     @Column(name = "rating", nullable = true)
-    public Double getRating() { return rating; }
-    public void setRating(Double rating) { this.rating = rating; }
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 
     @Basic
     @Column(name = "image_path", nullable = true, length = 120)
     public String getImage_path() {
         return image_path;
     }
+
     public void setImage_path(String image_path) {
         this.image_path = image_path;
     }
 
 
     @Basic
-    @Column(name = "image_path", nullable = true, length = 80)
-    public String getSummary() {return summary;}
-    public void setSummary(String summary) { this.summary = summary; }
+    @Column(name = "summary", nullable = true, length = 80)
+    public String getSummary() {
+        return summary;
+    }
 
-    @Basic
-    @Column(name = "film_director", nullable = true)
-    public long getFilm_director() { return film_director; }
-    public void setFilm_director(long film_director) {this.film_director = film_director; }
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
 
+    @ManyToOne
+    @JoinColumn(name = "film_director")
+    public Personne getFilm_director() {
+        return film_director;
+    }
 
+    public void setFilm_director(Personne film_director) {
+        this.film_director = film_director;
+    }
 
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass () != o.getClass ()) return false;
 
         Film film = (Film) o;
 
         if (id != film.id) return false;
-        if (title != null ? !title.equals(film.title) : film.title != null) return false;
-        if (rating != null ? !rating.equals(film.rating) : film.rating != null) return false;
-        if (image_path != null ? !image_path.equals(film.image_path) : film.image_path != null) return false;
-        if (summary != null ? !summary.equals(film.summary) : film.summary != null) return false;
-        if (film_director != film.film_director) return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash (getId (), getTitle (), getRating (), getImage_path (), getSummary (), getFilm_director (), getRole ());
+        return Objects.hash (getId ());
     }
 
-    public List<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(List<Role> role) {
-        this.role = role;
-    }
 }

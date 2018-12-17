@@ -12,7 +12,8 @@ public class Personne {
     private String prenom;
     private Integer naissance;
     private String photoPath;
-    public List<Role> role;
+    private List<Film> listeFilms;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +66,11 @@ public class Personne {
         this.photoPath = imagePath;
     }
 
+
+    @OneToMany
+    public List<Film> getListeFilms() { return listeFilms; }
+    public void setListeFilms(List<Film> listeFilms) { this.listeFilms = listeFilms; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,29 +79,14 @@ public class Personne {
         Personne personne = (Personne) o;
 
         if (id != personne.id) return false;
-        if (nom != null ? !nom.equals(personne.nom) : personne.nom != null) return false;
-        if (prenom != null ? !prenom.equals(personne.prenom) : personne.prenom != null) return false;
-        if (naissance != null ? !naissance.equals(personne.naissance) : personne.naissance != null) return false;
-        if (photoPath != null ? !photoPath.equals(personne.photoPath) : personne.photoPath != null) return false;
-
         return true;
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (nom != null ? nom.hashCode() : 0);
-        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
-        result = 31 * result + (naissance != null ? naissance.hashCode() : 0);
-        result = 31 * result + (photoPath != null ? photoPath.hashCode() : 0);
         return result;
     }
 
-    public List<Role> getRole() {
-        return role;
-    }
 
-    public void setRole(List<Role> role) {
-        this.role = role;
-    }
 }

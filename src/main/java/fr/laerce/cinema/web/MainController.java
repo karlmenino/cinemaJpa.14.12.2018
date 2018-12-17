@@ -1,6 +1,8 @@
 package fr.laerce.cinema.web;
 
-import fr.laerce.cinema.dao.DataModel;
+import fr.laerce.cinema.dao.FilmDao;
+import fr.laerce.cinema.dao.PersonsDao;
+import fr.laerce.cinema.dao.RoleDao;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -24,7 +27,11 @@ import java.io.IOException;
 public class MainController {
     //on peut utiliser cette méthode avec autowired et component dans le servlet DataModel
     @Autowired
-    DataModel dataModel;
+    PersonsDao personsDao;
+    @Autowired
+    RoleDao roleDao;
+    @Autowired
+    FilmDao filmDao;
 
 
     //Pour mapper la servlet,ça remplace ce que l'on met dans web.xml.
@@ -32,7 +39,7 @@ public class MainController {
     public String main(Model M){
         //on ajoute a l'objet model la clef nom et karl
         M.addAttribute ("nom","karl" );
-        M.addAttribute ("films",dataModel.getFilms());
+        M.addAttribute ("films",filmDao.getAll ());
         //on return la chaine string index de façon à ouvrir index.html
         return "index";
     }
@@ -40,8 +47,8 @@ public class MainController {
     @GetMapping("/film/{id}")
     //on recupere id grace à pathvariable
     public String detail(Model m, @PathVariable("id") String id){
-        Integer idFilm = Integer.parseInt (id);
-        m.addAttribute ("film", dataModel.getById(idFilm));
+        long idFilm = Long.parseLong (id);
+        m.addAttribute ("film",filmDao.getById (idFilm));
         return"detail";
     }
 
@@ -90,6 +97,6 @@ public class MainController {
     //on recupere id grace à pathvariable
     public String acteur(Model m, @PathVariable("id") String id){
         //on envoie a acteur la personne concernée grace a la methode getbyaf et id qui est le nom de l'image
-        m.addAttribute ("actor", dataModel.getByAf(id));
+        m.addAttribute ("actor", personsDao.getByAf(id));
         return"acteur";}
 }

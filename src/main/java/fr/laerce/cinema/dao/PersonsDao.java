@@ -12,13 +12,12 @@ import java.util.List;
 
 @Component
 public class PersonsDao {
-
     @Autowired
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     @Transactional
     public void save(Personne p){
-        entityManager.persist(p);
+        entityManager.merge(p);
     }
 
     public List<Personne> getAll(){
@@ -26,9 +25,9 @@ public class PersonsDao {
         return query.getResultList();
     }
 
-    public Personne getById(BigInteger id){
+    public Personne getByAf( String id){
         Personne retVal = null;
-        Query query = entityManager.createQuery("select p from Personne p where p.id = :id");
+        Query query = entityManager.createQuery("select p from Personne p where p.photoPath = :id");
         query.setParameter("id", id);
         List<Personne> persons = query.getResultList();
         if(!persons.isEmpty()){
