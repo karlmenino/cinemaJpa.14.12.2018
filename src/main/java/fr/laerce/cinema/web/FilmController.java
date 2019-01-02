@@ -1,6 +1,8 @@
 package fr.laerce.cinema.web;
 
 import fr.laerce.cinema.dao.FilmDao;
+import fr.laerce.cinema.dao.GenreDao;
+import fr.laerce.cinema.dao.PersonsDao;
 import fr.laerce.cinema.model.Film;
 import fr.laerce.cinema.service.ImageManager;
 import org.apache.commons.io.IOUtils;
@@ -27,7 +29,11 @@ public class FilmController {
     @Autowired
     ImageManager imm;
     @Autowired
+    PersonsDao personDao;
+    @Autowired
     FilmDao filmDao;
+    @Autowired
+    GenreDao genreDao;
 
     @GetMapping("/list")
     public String main(Model M){
@@ -44,12 +50,16 @@ public class FilmController {
     @GetMapping("/mod/{id}")
     public String mod(@PathVariable("id")long id, Model model){
         model.addAttribute("film", filmDao.findById(id).get());
+        model.addAttribute ("persons", personDao.findAll ());
+        model.addAttribute ("genres", genreDao.findAll ());
         return "film/form";
     }
 
     @GetMapping("/add")
     public String add(Model model){
         model.addAttribute("film", new Film ());
+        model.addAttribute ("persons", personDao.findAll ());
+        model.addAttribute ("genres", genreDao.findAll ());
         return "film/form";
     }
 
@@ -71,6 +81,7 @@ public class FilmController {
         filmDao.deleteById (id);
         return "redirect:/film/list/";
     }
+
     @Value( "${url}" )
     private String url;
     @GetMapping("/affiche/{id}")

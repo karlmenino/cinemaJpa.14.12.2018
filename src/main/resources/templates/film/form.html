@@ -9,8 +9,19 @@
     <input type="hidden" th:field="*{id}"/>
     <input type="hidden" th:field="*{image_path}"/>
     <p>Titre : <input type="text" th:field="*{title}"/></p>
-
-
+    <p>résumé : <input type="text" th:field="*{summary}"/></p>
+    <p>note : <input type="text" th:field="*{rating}"/></p>
+    <p>release : <input type="date" th:field="*{release}"/></p>
+    <p>Réalisateur :
+        <select th:field="*{film_director}">
+            <option th:each="nom: ${persons}" th:value="${nom.id}" th:text="${nom.getNom()}">
+        </select>
+    </p>
+    <p>genre :
+        <select multiple th:field="*{genreFilm}">
+            <option th:each="genre: ${genres}" th:value="${genre.id}" th:text="${genre.name}" >
+        </select>
+    </p>
     <p>Affiche : <input type="file" name="poster"/> <span th:text="*{image_path}">Fichier photo</span></p>
 
     <input type="submit" value="Valider" />

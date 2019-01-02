@@ -2,6 +2,7 @@ package fr.laerce.cinema.model;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalIdCache;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Personne {
         this.posts = posts;
     }
     @Basic
-    @Column(name = "surname", nullable = false, length = 60)
+    @Column(name = "surname", length = 60)
     public String getNom() {
         return nom;
     }
@@ -61,6 +62,7 @@ public class Personne {
     }
 
     @Basic
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "birthday", nullable = true)
     public LocalDate getNaissance() {
         return naissance;
@@ -81,7 +83,7 @@ public class Personne {
     }
 
 
-    @OneToMany
+    @OneToMany(mappedBy = "film_director")
     public List<Film> getListeFilms() { return listeFilms; }
     public void setListeFilms(List<Film> listeFilms) { this.listeFilms = listeFilms; }
 

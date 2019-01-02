@@ -18,9 +18,10 @@
             </p>
             <p th:each="genre:${film.getGenreFilm()}" th:text="${genre.name}">
             </p>
-            <p th:text="'note ='+${film.rating}">
-                note du film
-            </p>
+            <p th:text="'note ='+${film.rating}">note du film</p>
+            <p th:text="'release ='+${film.release}"></p>
+            <p th:text="'realisateur ='+${film.film_director.nom}"></p>
+
         </div>
         <div class="col-md-4">
             <a th:href="'/film/mod/'+${film.id}" >edit</a>
@@ -41,10 +42,8 @@
             <p th:text="'prenom : '+${test.person.prenom}">
                 prenom de l'acteur
             </p>
-            <p th:text="'date de naissance : '+${test.person.naissance}">
-                prenom de l'acteur
-            </p>
-            <p>
+            <p th:text="'date de naissance : '+${test.person.naissance}">prenom de l'acteur</p>
+
                 <a class="btn" th:href="@{'/acteur/'+${test.person.getPhotoPath()}}">View details »</a>
             </p>
         </div>

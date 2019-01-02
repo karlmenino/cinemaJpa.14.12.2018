@@ -23,10 +23,7 @@ public class Genre {
     public String getName() {return name;}
     public void setName(String name) { this.name = name;}
 
-    @ManyToMany
-    @JoinTable(name = "film_genre",
-            joinColumns = { @JoinColumn(name = "genre_id") },
-            inverseJoinColumns = { @JoinColumn(name = "film_id") })
+    @ManyToMany(mappedBy = "genreFilm")
     public List<Film> getListFilm() {
         return listFilm;
     }

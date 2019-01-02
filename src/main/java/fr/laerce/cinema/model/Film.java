@@ -1,7 +1,10 @@
 package fr.laerce.cinema.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.xml.soap.Text;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +18,7 @@ public class Film {
     private String image_path;
     private String summary;
     private Personne film_director;
+    private LocalDate release;
     private List<Role> posts = new ArrayList<> ();
 
     private List<Genre> genreFilm = new ArrayList<Genre> ();
@@ -40,7 +44,7 @@ public class Film {
     }
 
     @Basic
-    @Column(name = "title", nullable = false, length = 60)
+    @Column(name = "title", length = 60)
     public String getTitle() {
         return title;
     }
@@ -64,7 +68,6 @@ public class Film {
     public String getImage_path() {
         return image_path;
     }
-
     public void setImage_path(String image_path) {
         this.image_path = image_path;
     }
@@ -75,10 +78,15 @@ public class Film {
     public String getSummary() {
         return summary;
     }
-
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
+    @Basic
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "release_date", nullable = true, length = 80)
+    public LocalDate getRelease() {return release;}
+    public void setRelease(LocalDate release) {this.release = release; }
 
     @ManyToOne
     @JoinColumn(name = "film_director")
@@ -90,7 +98,9 @@ public class Film {
         this.film_director = film_director;
     }
 
-    @ManyToMany(mappedBy="listFilm")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name="film_genre", joinColumns = @JoinColumn(name="film_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     public List<Genre> getGenreFilm() {return genreFilm;}
 
     public void setGenreFilm(List<Genre> genreFilm) {this.genreFilm = genreFilm;}
