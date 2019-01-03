@@ -85,10 +85,30 @@
             </li>
         </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 ">
+        <input class="form-control md-sm-2" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+            <th:block th:if="${session.user == null}">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user/connection">connecter <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user/form">s'inscrire <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            </th:block>
+            <th:block th:if="${session.user != null}">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#"><div th:text="${session.user.login}"></div> <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/user/form">logout <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </th:block>
         </div>
         </nav>
     <h2>
