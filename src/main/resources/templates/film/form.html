@@ -26,6 +26,45 @@
 
     <input type="submit" value="Valider" />
 </form>
+<th:block th:if="${roles != null}">
+    <form action="#" th:action="@{/role/add}" th:object="${role}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <select th:field="*{film}">
+            <option th:value="${film.id}" th:text="${film.title}" selected></option>
+        </select>
+        <p>nom du role : <input type="text" th:field="*{name}"/></p>
+        <p>rang : <input type="text" th:field="*{rank}"/></p>
+        <p>acteur :
+            <select th:field="*{person}">
+                <option th:each="nom: ${persons}" th:value="${nom.id}" th:text="${nom.getNom()}">
+            </select>
+        </p>
+        <input type="submit" value="Valider" />
+    </form>
+    <div class="container-fluid">
+        <div class="row">
+    <div th:each="test:${roles}" class="row">
+        <div class="col-md-6">
+            <h2 th:text="${test.getRank()}+'er role : '+${test.getName()}">
+                Heading
+            </h2>
+            <p th:text="'nom : '+${test.person.nom}">
+                nom de l'acteur
+            </p>
+            <p th:text="'prenom : '+${test.person.prenom}">
+                prenom de l'acteur
+            </p>
+
+        </div>
+        <div class="col-md-6">
+            <a th:href="'/role/delete/'+${test.id}"  onClick="javascript:return confirm('Voulez-vous vraiment supprimer cet élément ?')">delete</a></td>
+        </div>
+    </div>
+        </div>
+
+
+
+</th:block>
 <div th:replace="fragment/footer.html::footer"></div>
 </body>
 

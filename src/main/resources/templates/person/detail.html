@@ -24,8 +24,10 @@
         <a th:href="'/person/mod/'+${person.id}" >edit</a>
         <a th:href="'/person/delete/'+${person.id}"  onClick="javascript:return confirm('Voulez-vous vraiment supprimer cet élément ?')">delete</a></td>
     </div>
-    <div th:each="jeu:${person.getPosts()}" class="row">
-        <div class="col-md-4">
+</div>
+    <div th:each="jeu:${person.getPosts()}"  style="display:block;">
+        <div class="row">
+        <div class="col-md-6">
             <img alt="Bootstrap Image Preview" th:src="'/film/affiche/'+${jeu.film.image_path}" height="150" width="150" />
         </div>
         <div class="col-md-6">
@@ -48,6 +50,9 @@
                 <a class="btn" th:href="@{'/film/detail/'+${jeu.film.id}}">View details »</a>
             </p>
         </div>
+    </div>
+    </div>
+
     </div>
 </div>
 <div th:replace="fragment/footer.html::footer"></div>

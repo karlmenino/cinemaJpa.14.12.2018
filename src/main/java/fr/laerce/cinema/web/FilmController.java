@@ -3,7 +3,9 @@ package fr.laerce.cinema.web;
 import fr.laerce.cinema.dao.FilmDao;
 import fr.laerce.cinema.dao.GenreDao;
 import fr.laerce.cinema.dao.PersonsDao;
+import fr.laerce.cinema.dao.RoleDao;
 import fr.laerce.cinema.model.Film;
+import fr.laerce.cinema.model.Role;
 import fr.laerce.cinema.service.ImageManager;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class FilmController {
     FilmDao filmDao;
     @Autowired
     GenreDao genreDao;
+    @Autowired
+    RoleDao roleDao;
 
     @GetMapping("/list")
     public String main(Model M){
@@ -52,6 +56,8 @@ public class FilmController {
         model.addAttribute("film", filmDao.findById(id).get());
         model.addAttribute ("persons", personDao.findAll ());
         model.addAttribute ("genres", genreDao.findAll ());
+        model.addAttribute ("roles", filmDao.findById(id).get().getPosts ());
+        model.addAttribute ("role", new Role ());
         return "film/form";
     }
 

@@ -1,9 +1,7 @@
 package fr.laerce.cinema.dao;
 
-import fr.laerce.cinema.model.User;
+import fr.laerce.cinema.model.Groups;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
 
 /**
  * Projet thyme-security
@@ -13,8 +11,5 @@ import java.util.Optional;
  *
  * @author fred
  */
-public interface UserDao extends JpaRepository<User, Long> {
-    User findByLogin(String name);
-    User findById(long id);
-
+public interface GroupDao extends JpaRepository<Groups, Long> {
 }

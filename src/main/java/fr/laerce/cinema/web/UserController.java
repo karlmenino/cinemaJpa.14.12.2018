@@ -2,8 +2,8 @@ package fr.laerce.cinema.web;
 
 import fr.laerce.cinema.dao.UserDao;
 import fr.laerce.cinema.model.User;
+import fr.laerce.cinema.service.JpaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     UserDao userDao;
+    @Autowired
+    JpaUserService jpaUserService;
 
     @GetMapping("/connection")
     public String connect(){
@@ -39,7 +41,7 @@ public class UserController {
     }
     @PostMapping("/form")
     public String form (@ModelAttribute User newuser) {
-        userDao.save(newuser);
+        jpaUserService.save(newuser);
         return "redirect:/";
     }
 }

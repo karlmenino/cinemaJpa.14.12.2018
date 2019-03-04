@@ -25,6 +25,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="USER_GROUP",
+            joinColumns =@JoinColumn(name = "ID_USER", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "ID_GROUP", referencedColumnName = "ID"))
+    private Set<Groups> groups;
+
     public long getId() {
         return id;
     }
@@ -73,6 +79,14 @@ public class User {
 
     public void setReviews(Set<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Set<Groups> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Groups> groups) {
+        this.groups = groups;
     }
 
     @Override
