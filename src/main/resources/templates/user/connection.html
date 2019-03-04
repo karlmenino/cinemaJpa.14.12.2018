@@ -8,6 +8,7 @@
 <form action="#" th:action="@{/login}" enctype="multipart/form-data" method="post">
     <p>login : <input type="text" name="username"/></p>
     <p>password : <input type="password" name="password"/></p>
+    <p>Remember Me:  <input type="checkbox" name="remember-me" /></p>
     <input type="submit" value="Valider" />
 </form>
 <div th:replace="fragment/footer.html::footer"></div>

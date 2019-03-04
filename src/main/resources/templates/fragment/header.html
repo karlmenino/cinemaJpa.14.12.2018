@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--declaration d'un espace de nommage th dans lequ'elle est stocké thymeleaf-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="header">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -66,21 +66,21 @@
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">personne</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" href="/person/list">liste</a>
-            <a class="dropdown-item" href="/person/add">créer</a>
+            <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" href="/person/add">créer</a>
             </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">film</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="/film/list">liste</a>
-                    <a class="dropdown-item" href="/film/add">créer</a>
+                    <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" href="/film/add">créer</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">genre</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="/genre/list">liste</a>
-                    <a class="dropdown-item" href="/genre/add">créer</a>
+                    <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" href="/genre/add">créer</a>
                 </div>
             </li>
         </li>

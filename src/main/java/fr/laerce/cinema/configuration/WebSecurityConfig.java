@@ -52,8 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/**", "/home").permitAll()
                     .antMatchers("/admin/**").hasAuthority ("ADMIN")
+                    .antMatchers("/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
@@ -61,7 +61,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                     .and()
                 .logout()
-                    .permitAll();
+                    .invalidateHttpSession (true)
+                    .deleteCookies ("JSESSIONID")
+                    .logoutSuccessUrl ("/")
+                    .permitAll()
+                    .and()
+                .rememberMe ()
+                    .key ("test")
+                    .tokenValiditySeconds (2400)
+                    .rememberMeParameter ("remember-me");
+
     }
 
 

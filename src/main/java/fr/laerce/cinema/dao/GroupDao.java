@@ -12,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author fred
  */
 public interface GroupDao extends JpaRepository<Groups, Long> {
+    @Override
+    Groups getOne(Long aLong);
 }

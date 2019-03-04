@@ -2,6 +2,7 @@ package fr.laerce.cinema.service;
 
 import fr.laerce.cinema.dao.GroupDao;
 import fr.laerce.cinema.dao.UserDao;
+import fr.laerce.cinema.model.Groups;
 import fr.laerce.cinema.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,9 @@ public class JpaUserService {
 
     public void save(User user){
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setGroups(new HashSet<> (groupDao.findAll().indexOf (2)));
+        HashSet<Groups> groupes = new HashSet ();
+        groupes.add (groupDao.getOne (Long.parseLong ("2")));
+        user.setGroups(groupes);
         userDao.save(user);
     }
 
