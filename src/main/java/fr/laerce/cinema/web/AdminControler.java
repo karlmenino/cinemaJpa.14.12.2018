@@ -3,6 +3,7 @@ package fr.laerce.cinema.web;
 import fr.laerce.cinema.model.User;
 import fr.laerce.cinema.service.JpaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,11 @@ public class AdminControler {
     @Autowired
     JpaUserService jpaUserService;
 
+    @GetMapping("/")
+    @PreAuthorize ("hasAuthority('ADMIN')")
+    public String index() {
+        return "admin/index";
+    }
     @GetMapping("/list")
     public String listuser(Model model) {
         model.addAttribute("listuser", jpaUserService.listeUser());
